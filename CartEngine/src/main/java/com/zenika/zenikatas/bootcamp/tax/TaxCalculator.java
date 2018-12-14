@@ -4,6 +4,6 @@ import java.math.BigDecimal;
 
 public interface TaxCalculator {
 
-    BigDecimal calculateTax(BigDecimal price, String country);
+    BigDecimal calculateTax(BigDecimal price);
 
 }

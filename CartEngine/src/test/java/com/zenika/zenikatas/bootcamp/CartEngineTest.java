@@ -1,6 +1,7 @@
 package com.zenika.zenikatas.bootcamp;
 
 import com.zenika.zenikatas.bootcamp.data.Article;
+import com.zenika.zenikatas.bootcamp.tax.StatesTaxCalculator;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,7 +12,7 @@ public class CartEngineTest {
 
     @Test
     public void shouldCalculatePricesForCA() {
-        String country = "CA";
+        StatesTaxCalculator country = StatesTaxCalculator.of("CA");
         Article article = new Article(300);
         assertThat(cartEngine.calculateTotalPrice(article, country)).isEqualTo(324.75);
         article = new Article(300, 2);
@@ -20,7 +21,7 @@ public class CartEngineTest {
 
     @Test
     public void shouldCalculatePricesForTX() {
-        String country = "TX";
+        StatesTaxCalculator country = StatesTaxCalculator.of("TX");
         Article article = new Article(23, 5);
         assertThat(cartEngine.calculateTotalPrice(article, country)).isEqualTo(122.19);
         article = new Article(2345, 22);
@@ -31,14 +32,14 @@ public class CartEngineTest {
 
     @Test
     public void shouldCalculatePricesForNV() {
-        String country = "NV";
+        StatesTaxCalculator country = StatesTaxCalculator.of("NV");
         Article article = new Article(21, 50);
         assertThat(cartEngine.calculateTotalPrice(article, country)).isEqualTo(1099.98);
     }
 
     @Test
     public void shouldCalculatePricesForUT() {
-        String country = "UT";
+        StatesTaxCalculator country = StatesTaxCalculator.of("UT");
         Article article = new Article(1295, 44);
         assertThat(cartEngine.calculateTotalPrice(article, country)).isEqualTo(51750.66);
         article = new Article(2315, 9);
@@ -47,7 +48,7 @@ public class CartEngineTest {
 
     @Test
     public void shouldCalculatePricesForAL() {
-        String country = "AL";
+        StatesTaxCalculator country = StatesTaxCalculator.of("AL");
         Article article = new Article(362, 27);
         assertThat(cartEngine.calculateTotalPrice(article, country)).isEqualTo(9453.41);
     }

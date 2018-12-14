@@ -4,20 +4,36 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StatesTaxCalculator implements TaxCalculator {
+public enum StatesTaxCalculator implements TaxCalculator {
 
-    private static Map<String, Double> taxesByCountry = new HashMap<>();
+    CA(1.0825),
+    TX(1.0625),
+    NV(1.08),
+    UT(1.0685),
+    AL(1.04);
+
+    private static Map<String, StatesTaxCalculator> taxesByCountry = new HashMap<>();
 
     static {
-        taxesByCountry.put("CA", 1.0825);
-        taxesByCountry.put("TX", 1.0625);
-        taxesByCountry.put("NV", 1.08);
-        taxesByCountry.put("UT", 1.0685);
-        taxesByCountry.put("AL", 1.04);
+        taxesByCountry.put("CA", CA);
+        taxesByCountry.put("TX", TX);
+        taxesByCountry.put("NV", NV);
+        taxesByCountry.put("UT", UT);
+        taxesByCountry.put("AL", AL);
+    }
+
+    private double taxRate;
+
+    StatesTaxCalculator(double taxRate) {
+        this.taxRate = taxRate;
+    }
+
+    public static StatesTaxCalculator of(String countryCode) {
+        return taxesByCountry.get(countryCode);
     }
 
     @Override
-    public BigDecimal calculateTax(BigDecimal price, String country) {
-        return price.multiply(new BigDecimal(taxesByCountry.get(country)));
+    public BigDecimal calculateTax(BigDecimal price) {
+        return price.multiply(new BigDecimal(taxRate));
     }
 }
