@@ -8,34 +8,37 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class BowlingScoreCalculatorTest {
 
+    private static final Frame SPARE = new Frame(5, 5);
+    private static final Frame REGULAR_8 = new Frame(5, 3);
+
     @Test
     public void shouldReturnTheSumForTheFrames() {
         List<Frame> frames = new ArrayList<>();
-        frames.add(new Frame(5, 2));
-        frames.add(new Frame(4, 5));
+        frames.add(REGULAR_8);
+        frames.add(REGULAR_8);
         assertThat(16).isEqualTo(calculateScore(frames));
     }
 
     @Test
     public void shouldReturn10ForASpare() {
         List<Frame> frames = new ArrayList<>();
-        frames.add(new Frame(5, 5));
+        frames.add(SPARE);
         assertThat(10).isEqualTo(calculateScore(frames));
     }
 
     @Test
     public void shouldReturn23ForASpareAnd8() {
         List<Frame> frames = new ArrayList<>();
-        frames.add(new Frame(5, 5));
-        frames.add(new Frame(5, 3));
+        frames.add(SPARE);
+        frames.add(REGULAR_8);
         assertThat(23).isEqualTo(calculateScore(frames));
     }
 
     @Test
     public void shouldReturn18For8AndASpare() {
         List<Frame> frames = new ArrayList<>();
-        frames.add(new Frame(5, 3));
-        frames.add(new Frame(5, 5));
+        frames.add(REGULAR_8);
+        frames.add(SPARE);
         assertThat(18).isEqualTo(calculateScore(frames));
     }
 
@@ -60,7 +63,7 @@ public class BowlingScoreCalculatorTest {
         return reversedFrames;
     }
 
-    private class Frame {
+    private static class Frame {
         private final int firstTry;
         private final int secondTry;
 
