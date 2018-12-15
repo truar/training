@@ -1,16 +1,22 @@
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BowlingScoreCalculatorTest {
 
     @Test
-    public void shouldReturnTheSumForTheFrame() {
-        assertThat(7).isEqualTo(calculateFrame(new Frame(5, 2)));
+    public void shouldReturnTheSumForTheFrames() {
+        List<Frame> frames = new ArrayList<>();
+        frames.add(new Frame(5, 2));
+        assertThat(7).isEqualTo(calculateScore(frames));
     }
 
-    private int calculateFrame(Frame frame) {
-        return frame.firstTry + frame.secondTry;
+    private int calculateScore(List<Frame> frames) {
+
+        return frames.get(0).firstTry + frames.get(0).secondTry;
     }
 
     private class Frame {
