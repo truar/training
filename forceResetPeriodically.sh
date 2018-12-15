@@ -59,6 +59,7 @@ resetTimer
 
 # Global last commit var.
 # If the commit changed, we reset the timer
+
 lastCommit=$(git log --format=oneline | head -n 1 | cut -f 1 -d " ")
 
 
