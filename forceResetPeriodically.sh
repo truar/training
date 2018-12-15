@@ -29,6 +29,7 @@ function resetIfLastCommitChanged {
 	if [ "$localLastCommit" != "$lastCommit" ]
 	then
 		echo -ne "Last commit changed from $lastCommit to $localLastCommit"
+		lastCommit=$localLastCommit
 		resetTimer
 	fi
 }
