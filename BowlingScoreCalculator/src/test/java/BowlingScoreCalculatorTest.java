@@ -17,13 +17,18 @@ public class BowlingScoreCalculatorTest {
     }
 
     private int calculateScore(List<Frame> frames) {
-        List<Frame> reversedFrames = new ArrayList<>(frames);
-        Collections.reverse(reversedFrames);
+        List<Frame> reversedFrames = reverseFrame(frames);
         int score = 0;
         for(Frame frame: reversedFrames) {
             score += frame.firstTry + frame.secondTry;
         }
         return score;
+    }
+
+    private List<Frame> reverseFrame(List<Frame> frames) {
+        List<Frame> reversedFrames = new ArrayList<>(frames);
+        Collections.reverse(reversedFrames);
+        return reversedFrames;
     }
 
     private class Frame {
