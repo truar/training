@@ -1,6 +1,7 @@
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,8 +17,10 @@ public class BowlingScoreCalculatorTest {
     }
 
     private int calculateScore(List<Frame> frames) {
+        List<Frame> reversedFrames = new ArrayList<>(frames);
+        Collections.reverse(reversedFrames);
         int score = 0;
-        for(Frame frame: frames) {
+        for(Frame frame: reversedFrames) {
             score += frame.firstTry + frame.secondTry;
         }
         return score;
