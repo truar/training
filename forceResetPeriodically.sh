@@ -28,7 +28,7 @@ function resetIfLastCommitChanged {
 	localLastCommit=$(git log --format=oneline | head -n 1 | cut -f 1 -d " ")
 	if [ "$localLastCommit" != "$lastCommit" ]
 	then
-		echo -ne "Last commit changed from $lastCommit to $localLastCommit"
+		echo -ne "\nLast commit changed from $lastCommit to $localLastCommit. "
 		lastCommit=$localLastCommit
 		resetTimer
 	fi
@@ -43,7 +43,7 @@ function loopInfinitly {
 		if [ $timer = 0 ]
 		then
 			resetTimer
-			echo "gitResetHard"
+			gitResetHard
 		fi
 	done
 }
