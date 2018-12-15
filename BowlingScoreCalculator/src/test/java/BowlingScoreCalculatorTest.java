@@ -6,6 +6,10 @@ public class BowlingScoreCalculatorTest {
 
     @Test
     public void shouldReturnTheSumForTheFrame() {
-        assertThat(1).isEqualTo(1);
+        assertThat(10).isEqualTo(calculateFrame(5, 5));
+    }
+
+    private int calculateFrame(int firstTry, int secondTry) {
+        return firstTry + secondTry;
     }
 }
