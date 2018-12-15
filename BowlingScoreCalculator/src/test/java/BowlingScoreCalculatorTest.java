@@ -16,6 +16,13 @@ public class BowlingScoreCalculatorTest {
         assertThat(16).isEqualTo(calculateScore(frames));
     }
 
+    @Test
+    public void shouldReturn10ForASpare() {
+        List<Frame> frames = new ArrayList<>();
+        frames.add(new Frame(5, 5));
+        assertThat(10).isEqualTo(calculateScore(frames));
+    }
+
     private int calculateScore(List<Frame> frames) {
         List<Frame> reversedFrames = reverseFrame(frames);
         int score = 0;
