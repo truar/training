@@ -2,6 +2,7 @@
 
 function gitResetHard {
 	git reset --hard HEAD
+    git clean -fd
 }
 
 function loopInfinitly {
