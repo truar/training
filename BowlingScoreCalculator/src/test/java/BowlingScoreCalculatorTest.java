@@ -15,8 +15,11 @@ public class BowlingScoreCalculatorTest {
     }
 
     private int calculateScore(List<Frame> frames) {
-
-        return frames.get(0).firstTry + frames.get(0).secondTry;
+        int score = 0;
+        for(Frame frame: frames) {
+            score = frame.firstTry + frame.secondTry;
+        }
+        return score;
     }
 
     private class Frame {
