@@ -63,18 +63,15 @@ public class BowlingScoreCalculatorTest {
         int score = 0;
         List<Frame> reversedFrames = reverseFrame(frames);
         Frame previousFrame = new Frame(0,0);
-        int rollN1 = 0;
-        int rollN2 = 0;
         for(Frame frame: reversedFrames) {
             int scoreCurrentFrame = frame.getScore();
             if(frame.isASpare()) {
-                scoreCurrentFrame += rollN1;
+                scoreCurrentFrame += previousFrame.firstTry;
             } else if(frame.isAStrike()) {
                 scoreCurrentFrame += previousFrame.getScore();
             }
             score += scoreCurrentFrame;
             previousFrame = frame;
-            rollN1 = frame.firstTry;
         }
         return score;
     }
