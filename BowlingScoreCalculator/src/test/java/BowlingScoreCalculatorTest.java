@@ -50,6 +50,14 @@ public class BowlingScoreCalculatorTest {
         assertThat(10).isEqualTo(calculateScore(frames));
     }
 
+    @Test
+    public void shouldReturn26ForAStrikeAnd8() {
+        List<Frame> frames = new ArrayList<>();
+        frames.add(STRIKE);
+        frames.add(REGULAR_8);
+        assertThat(26).isEqualTo(calculateScore(frames));
+    }
+
     private int calculateScore(List<Frame> frames) {
         int score = 0;
         List<Frame> reversedFrames = reverseFrame(frames);
@@ -58,6 +66,8 @@ public class BowlingScoreCalculatorTest {
             int scoreCurrentFrame = frame.getScore();
             if(frame.isASpare()) {
                 scoreCurrentFrame += previousFrame.firstTry;
+            } else if(frame.isAStrike()) {
+                scoreCurrentFrame += previousFrame.getScore();
             }
             score += scoreCurrentFrame;
             previousFrame = frame;
@@ -85,7 +95,11 @@ public class BowlingScoreCalculatorTest {
         }
 
         private boolean isASpare() {
-            return getScore() == 10;
+            return getScore() == 10 && firstTry < 10;
+        }
+
+        public boolean isAStrike() {
+            return firstTry == 10;
         }
     }
 }
