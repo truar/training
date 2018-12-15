@@ -32,8 +32,8 @@ public class BowlingScoreCalculatorTest {
     }
 
     private int calculateScore(List<Frame> frames) {
-        List<Frame> reversedFrames = reverseFrame(frames);
         int score = 0;
+        List<Frame> reversedFrames = reverseFrame(frames);
         Frame previousFrame = new Frame(0,0);
         for(Frame frame: reversedFrames) {
             int scoreCurrentFrame = frame.getScore();
