@@ -23,11 +23,27 @@ public class BowlingScoreCalculatorTest {
         assertThat(10).isEqualTo(calculateScore(frames));
     }
 
+    @Test
+    public void shouldReturn23ForASpareAnd8() {
+        List<Frame> frames = new ArrayList<>();
+        frames.add(new Frame(5, 5));
+        frames.add(new Frame(5, 3));
+        assertThat(23).isEqualTo(calculateScore(frames));
+    }
+
     private int calculateScore(List<Frame> frames) {
         List<Frame> reversedFrames = reverseFrame(frames);
         int score = 0;
+        Frame previousFrame = null;
         for(Frame frame: reversedFrames) {
-            score += frame.firstTry + frame.secondTry;
+            int scoreCurrentFrame = frame.firstTry + frame.secondTry;
+            if(scoreCurrentFrame == 10) {
+                if(previousFrame != null) {
+                    scoreCurrentFrame += previousFrame.firstTry;
+                }
+            }
+            score += scoreCurrentFrame;
+            previousFrame = frame;
         }
         return score;
     }
