@@ -6,9 +6,19 @@ function gitResetHard {
 }
 
 function loopInfinitly {
+	numberOfSecondRemaining=$1
 	while :; do
-		sleep $1
-		gitResetHard
+		numberOfMinutesDisplay=$(($numberOfSecondRemaining / 60))
+		numberOfSecondsDisplay=$(($numberOfSecondRemaining % 60))
+		echo -ne "\r$numberOfMinutesDisplay:$numberOfSecondsDisplay"
+		numberOfSecondRemaining=$(($numberOfSecondRemaining - 1))
+		sleep 1
+		if [ $numberOfSecondRemaining = 0 ]
+		then
+			numberOfSecondRemaining=$1
+			echo ""
+			gitResetHard
+		fi
 	done
 }
 
