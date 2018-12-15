@@ -11,13 +11,14 @@ public class BowlingScoreCalculatorTest {
     public void shouldReturnTheSumForTheFrames() {
         List<Frame> frames = new ArrayList<>();
         frames.add(new Frame(5, 2));
-        assertThat(7).isEqualTo(calculateScore(frames));
+        frames.add(new Frame(4, 5));
+        assertThat(16).isEqualTo(calculateScore(frames));
     }
 
     private int calculateScore(List<Frame> frames) {
         int score = 0;
         for(Frame frame: frames) {
-            score = frame.firstTry + frame.secondTry;
+            score += frame.firstTry + frame.secondTry;
         }
         return score;
     }
