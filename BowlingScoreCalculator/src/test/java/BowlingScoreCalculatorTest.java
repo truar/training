@@ -6,11 +6,20 @@ public class BowlingScoreCalculatorTest {
 
     @Test
     public void shouldReturnTheSumForTheFrame() {
-        assertThat(7).isEqualTo(calculateFrame(5, 2));
-        assertThat(9).isEqualTo(calculateFrame(4, 5));
+        assertThat(7).isEqualTo(calculateFrame(new Frame(5, 2)));
     }
 
-    private int calculateFrame(int firstTry, int secondTry) {
-        return firstTry + secondTry;
+    private int calculateFrame(Frame frame) {
+        return frame.firstTry + frame.secondTry;
+    }
+
+    private class Frame {
+        private final int firstTry;
+        private final int secondTry;
+
+        Frame(int firstTry, int secondTry) {
+            this.firstTry = firstTry;
+            this.secondTry = secondTry;
+        }
     }
 }
