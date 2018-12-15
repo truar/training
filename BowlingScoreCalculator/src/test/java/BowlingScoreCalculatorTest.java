@@ -36,7 +36,7 @@ public class BowlingScoreCalculatorTest {
         int score = 0;
         Frame previousFrame = null;
         for(Frame frame: reversedFrames) {
-            int scoreCurrentFrame = frame.firstTry + frame.secondTry;
+            int scoreCurrentFrame = frame.getScore();
             if(scoreCurrentFrame == 10) {
                 if(previousFrame != null) {
                     scoreCurrentFrame += previousFrame.firstTry;
@@ -61,6 +61,10 @@ public class BowlingScoreCalculatorTest {
         Frame(int firstTry, int secondTry) {
             this.firstTry = firstTry;
             this.secondTry = secondTry;
+        }
+
+        private int getScore() {
+            return firstTry + secondTry;
         }
     }
 }
