@@ -98,7 +98,7 @@ public class BowlingScoreCalculatorTest {
             return getScore() == 10 && firstTry < 10;
         }
 
-        public boolean isAStrike() {
+        private boolean isAStrike() {
             return firstTry == 10;
         }
     }
