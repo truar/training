@@ -5,19 +5,44 @@ function gitResetHard {
     git clean -fd
 }
 
+function displayRemainingSecond {
+	numberOfMinutesDisplay=$(($timer / 60))
+	numberOfSecondsDisplay=$(($timer % 60))
+	if (( $numberOfMinutesDisplay < 10 ))
+	then
+		numberOfMinutesDisplay="0$numberOfMinutesDisplay"
+	fi
+	if (( $numberOfSecondsDisplay < 10 ))
+	then
+		numberOfSecondsDisplay="0$numberOfSecondsDisplay"
+	fi
+	echo -ne "\r$numberOfMinutesDisplay:$numberOfSecondsDisplay"
+}
+
+function resetTimer {
+	timer=$originalTimer
+	echo "Timer resetted"
+}
+
+function resetIfLastCommitChanged {
+	localLastCommit=$(git log --format=oneline | head -n 1 | cut -f 1 -d " ")
+	if [ "$localLastCommit" != "$lastCommit" ]
+	then
+		echo -ne "Last commit changed from $lastCommit to $localLastCommit"
+		resetTimer
+	fi
+}
+
 function loopInfinitly {
-	numberOfSecondRemaining=$1
 	while :; do
-		numberOfMinutesDisplay=$(($numberOfSecondRemaining / 60))
-		numberOfSecondsDisplay=$(($numberOfSecondRemaining % 60))
-		echo -ne "\r$numberOfMinutesDisplay:$numberOfSecondsDisplay"
-		numberOfSecondRemaining=$(($numberOfSecondRemaining - 1))
+		displayRemainingSecond
+		resetIfLastCommitChanged
+		timer=$(($timer - 1))
 		sleep 1
-		if [ $numberOfSecondRemaining = 0 ]
+		if [ $timer = 0 ]
 		then
-			numberOfSecondRemaining=$1
-			echo ""
-			gitResetHard
+			resetTimer
+			echo "gitResetHard"
 		fi
 	done
 }
@@ -28,6 +53,12 @@ if [ "$numberOfMinutes" = "" ]
 then
 	numberOfMinutes=2
 fi
-numberOfSeconds=$(($numberOfMinutes * 60))
+originalTimer=$(($numberOfMinutes * 60))
+resetTimer
 
-loopInfinitly $numberOfSeconds
+# Global last commit var.
+# If the commit changed, we reset the timer
+lastCommit=$(git log --format=oneline | head -n 1 | cut -f 1 -d " ")
+
+
+loopInfinitly
