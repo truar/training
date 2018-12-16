@@ -111,17 +111,8 @@ public class BowlingScoreCalculatorTest {
         for(Integer roll: rolls) {
             if(isAStrike(roll)) {
                 if(isTheLastFrame(count)) {
-                    if(roll1) {
-                        currentFrame.setFirstRoll(roll);
-                        roll1 = false;
-                        roll2 = true;
-                    } else if(roll2) {
-                        currentFrame.setSecondRoll(roll);
-                        roll2 = false;
-                    } else {
-                        currentFrame.setBonusRoll(roll);
-                        roll1 = true;
-                        roll2 = false;
+                    currentFrame.addRoll(roll);
+                    if(count == 12) {
                         frames.add(currentFrame);
                     }
                 } else {
@@ -253,6 +244,10 @@ public class BowlingScoreCalculatorTest {
 
         public void setBonusRoll(int bonusRoll) {
             this.bonusRoll = bonusRoll;
+        }
+
+        public void addRoll(int roll) {
+            rolls.add(roll);
         }
     }
 
