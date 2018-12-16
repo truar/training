@@ -78,12 +78,6 @@ public class BowlingScoreCalculatorTest {
         int score = 0;
         int currentRoll = 0;
 
-        List<Frame> frames = new ArrayList<>();
-        for(Integer roll: rolls) {
-
-            frames.add(new Frame(roll, 0));
-        }
-
         for(Integer roll: rolls) {
             if(roll == 10) {
                 int rollN1 = 0;
@@ -106,6 +100,25 @@ public class BowlingScoreCalculatorTest {
             }
         }
         return score;
+    }
+
+    private List<Frame> getFrames(List<Integer> rolls) {
+        List<Frame> frames = new ArrayList<>();
+        Frame currentFrame = new Frame(0,0);
+        for(Integer roll: rolls) {
+            if(roll == 10) {
+                currentFrame.firstRoll = roll;
+                frames.add(new Frame(roll, 0));
+            }
+        }
+        return frames;
+    }
+
+    @Test
+    public void shouldReturnAFrameWithOneRoll() {
+        List<Integer> rolls = new ArrayList<>();
+        rolls.add(10);
+        assertThat(getFrames(rolls).size()).isEqualTo(1);
     }
 
     static class Frame {
