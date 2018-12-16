@@ -199,6 +199,32 @@ public class BowlingScoreCalculatorTest {
         assertThat(getFrames(rolls).size()).isEqualTo(10);
     }
 
+    @Test
+    public void shouldReturn10FramesFor20Rolls() {
+        List<Integer> rolls = new ArrayList<>();
+        rolls.add(4);
+        rolls.add(4);
+        rolls.add(4);
+        rolls.add(4);
+        rolls.add(4);
+        rolls.add(4);
+        rolls.add(4);
+        rolls.add(4);
+        rolls.add(4);
+        rolls.add(4);
+        rolls.add(4);
+        rolls.add(4);
+        rolls.add(4);
+        rolls.add(4);
+        rolls.add(4);
+        rolls.add(4);
+        rolls.add(4);
+        rolls.add(4);
+        rolls.add(4);
+        rolls.add(4);
+        assertThat(getFrames(rolls).size()).isEqualTo(10);
+    }
+
 
     static class Frame {
         List<Integer> rolls = new ArrayList<>(3);
