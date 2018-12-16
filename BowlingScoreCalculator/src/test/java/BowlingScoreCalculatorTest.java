@@ -176,6 +176,14 @@ public class BowlingScoreCalculatorTest {
         frame.nextNextRoll = 9;
         assertThat(frame.getScore()).isEqualTo(21);
     }
+    @Test
+    public void shouldCalculateTheScoreOfASpareWithTheNextRoll() {
+        Frame frame = new Frame();
+        frame.addRoll(5);
+        frame.addRoll(5);
+        frame.nextRoll = 2;
+        assertThat(frame.getScore()).isEqualTo(12);
+    }
 
     static class Frame {
         List<Integer> rolls = new ArrayList<>(3);
@@ -184,6 +192,10 @@ public class BowlingScoreCalculatorTest {
 
         private boolean isAStrike() {
             return getFirstRoll() == 10;
+        }
+
+        private boolean isASpare() {
+            return getFirstRoll() + getSecondRoll() == 10;
         }
 
         int getFirstRoll() {
@@ -205,9 +217,12 @@ public class BowlingScoreCalculatorTest {
         int getScore() {
             if(isAStrike()) {
                 return getFirstRoll() + nextNextRoll + nextRoll;
+            } else if (isASpare()) {
+                return getFirstRoll() + getSecondRoll() + nextRoll;
             }
             return getFirstRoll() + getSecondRoll() + getBonusRoll();
         }
+
     }
 
 }
