@@ -52,42 +52,4 @@ public class BowlingScoreCalculator {
         return new Frame();
     }
 
-    static class Frame {
-        List<Integer> rolls = new ArrayList<>(3);
-        int nextRoll = 0;
-        int nextNextRoll = 0;
-
-        private boolean isAStrike() {
-            return getFirstRoll() == 10;
-        }
-
-        private boolean isASpare() {
-            return getFirstRoll() + getSecondRoll() == 10;
-        }
-
-        int getFirstRoll() {
-            return rolls.get(0);
-        }
-
-        int getSecondRoll() {
-            return (rolls.size() < 2) ? 0 : rolls.get(1);
-        }
-
-        void addRoll(int roll) {
-            rolls.add(roll);
-        }
-
-        int getScore() {
-            return getFirstRoll() + getSecondRoll() + nextRoll + nextNextRoll;
-        }
-
-        private void setNext2Rolls(Integer nextRoll, Integer nextNextRoll) {
-            this.nextRoll = nextRoll;
-            this.nextNextRoll = nextNextRoll;
-        }
-
-        private void setNextRoll(Integer nextRoll) {
-            this.setNext2Rolls(nextRoll, 0);
-        }
-    }
 }
