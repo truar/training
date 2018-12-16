@@ -221,7 +221,7 @@ public class BowlingScoreCalculatorTest {
             } else if (isASpare()) {
                 return getFirstRoll() + getSecondRoll() + nextRoll;
             }
-            return getFirstRoll() + getSecondRoll() + getBonusRoll();
+            return getFirstRoll() + getSecondRoll();
         }
 
     }
