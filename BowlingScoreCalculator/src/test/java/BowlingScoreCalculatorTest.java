@@ -111,7 +111,7 @@ public class BowlingScoreCalculatorTest {
             currentFrame.addRoll(roll);
             if(currentFrame.isAStrike()) {
                 if(isTheLastFrame(count)) {
-                    if(count == 12) {
+                    if(isTheLastRoll(count)) {
                         frames.add(currentFrame);
                     }
                 } else {
@@ -130,6 +130,10 @@ public class BowlingScoreCalculatorTest {
             count++;
         }
         return frames;
+    }
+
+    private boolean isTheLastRoll(int count) {
+        return count == 12;
     }
 
     private boolean isTheLastFrame(int count) {
