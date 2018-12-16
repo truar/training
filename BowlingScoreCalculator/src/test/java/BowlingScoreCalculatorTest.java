@@ -78,10 +78,8 @@ public class BowlingScoreCalculatorTest {
     }
 
     private int getCurrentRollIndexAndAddFrame(List<Integer> rolls, Frame currentFrame, int currentRollIndex) {
-        int roll;
         currentRollIndex++;
-        roll = rolls.get(currentRollIndex);
-        currentFrame.addRoll(roll);
+        currentFrame.addRoll(rolls.get(currentRollIndex));
         return currentRollIndex;
     }
 
