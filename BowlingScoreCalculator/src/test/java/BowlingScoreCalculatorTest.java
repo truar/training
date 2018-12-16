@@ -87,12 +87,7 @@ public class BowlingScoreCalculatorTest {
 
     private static Frame addAndResetFrame(List<Frame> frames, Frame currentFrame) {
         frames.add(currentFrame);
-        currentFrame = new Frame();
-        return currentFrame;
-    }
-
-    private boolean isTheLastFrame(int count) {
-        return count >= 9;
+        return new Frame();
     }
 
     @Test
