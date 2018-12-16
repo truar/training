@@ -104,7 +104,7 @@ public class BowlingScoreCalculatorTest {
 
     private List<Frame> getFrames(List<Integer> rolls) {
         List<Frame> frames = new ArrayList<>();
-        Frame currentFrame = new Frame(0,0);
+        Frame currentFrame = new Frame();
         boolean roll1 = true;
         int count = 0;
         for(Integer roll: rolls) {
@@ -123,7 +123,7 @@ public class BowlingScoreCalculatorTest {
                 } else {
                     roll1 = true;
                     frames.add(currentFrame);
-                    currentFrame = new Frame(0,0);
+                    currentFrame = new Frame();
                 }
 
             }
@@ -202,42 +202,18 @@ public class BowlingScoreCalculatorTest {
 
     static class Frame {
         List<Integer> rolls = new ArrayList<>(3);
-        int firstRoll;
-        int secondRoll;
-        int bonusRoll;
-
-        Frame(int firstRoll, int secondRoll) {
-            this(firstRoll, secondRoll, 0);
-        }
-
-        Frame(int firstRoll, int secondRoll, int bonusRoll) {
-            this.firstRoll = firstRoll;
-            this.secondRoll = secondRoll;
-            this.bonusRoll = bonusRoll;
-        }
 
         public int getFirstRoll() {
             return rolls.get(0);
         }
 
-        public void setFirstRoll(int firstRoll) {
-            this.firstRoll = firstRoll;
-        }
 
         public int getSecondRoll() {
             return rolls.get(1);
         }
 
-        public void setSecondRoll(int secondRoll) {
-            this.secondRoll = secondRoll;
-        }
-
         public int getBonusRoll() {
-            return bonusRoll;
-        }
-
-        public void setBonusRoll(int bonusRoll) {
-            this.bonusRoll = bonusRoll;
+            return rolls.get(2);
         }
 
         public void addRoll(int roll) {
