@@ -119,7 +119,8 @@ public class BowlingScoreCalculatorTest {
         List<Frame> frames = new ArrayList<>();
         Frame currentFrame = new Frame();
         boolean roll1 = true;
-        for(int i = 0, j = 0; i < rolls.size(); i++) {
+
+        for(int i = 0; i < rolls.size(); i++) {
             int roll = rolls.get(i);
             currentFrame.addRoll(roll);
             if(currentFrame.isAStrike()) {
