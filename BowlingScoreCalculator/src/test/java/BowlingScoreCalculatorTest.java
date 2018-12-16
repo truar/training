@@ -10,7 +10,7 @@ public class BowlingScoreCalculatorTest {
     private static final List<Integer> ONLY_STRIKE = new ArrayList<>();
     private static final List<Integer> NO_STRIKE_NOR_SPARE = new ArrayList<>();
     private static final List<Integer> ONLY_SPARE = new ArrayList<>();
-    private static final int MAX_FRAMES_PER_GAME = 10î;
+    private static final int MAX_FRAMES_PER_GAME = 10;
 
     static {
         for (int i = 0; i < 12; i++) {
