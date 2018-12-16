@@ -60,6 +60,7 @@ public class BowlingScoreCalculatorTest {
         while(currentFrameIndex < 10) {
             int roll = rolls.get(currentRollIndex);
             currentFrame.addRoll(roll);
+
             if(currentFrame.isAStrike()) {
                 currentFrame.nextRoll = rolls.get(currentRollIndex + 1);
                 currentFrame.nextNextRoll = rolls.get(currentRollIndex + 2);
@@ -84,7 +85,7 @@ public class BowlingScoreCalculatorTest {
         return frames;
     }
 
-    private Frame addAndResetFrame(List<Frame> frames, Frame currentFrame) {
+    private static Frame addAndResetFrame(List<Frame> frames, Frame currentFrame) {
         frames.add(currentFrame);
         currentFrame = new Frame();
         return currentFrame;
