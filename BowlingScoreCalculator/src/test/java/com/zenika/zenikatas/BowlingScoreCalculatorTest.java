@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.zenika.zenikatas.Frame;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,24 +28,26 @@ public class BowlingScoreCalculatorTest {
         ONLY_SPARE.add(5);
     }
 
+    private BowlingScoreCalculator calculator = new BowlingScoreCalculator();
+
     @Test
     public void shouldReturn300GivenOnlyStrike() {
-        assertThat(BowlingScoreCalculator.calculateScore(ONLY_STRIKE)).isEqualTo(300);
+        assertThat(calculator.calculateScore(ONLY_STRIKE)).isEqualTo(300);
     }
 
     @Test
     public void shouldReturn150GivenOnlySpare() {
-        assertThat(BowlingScoreCalculator.calculateScore(ONLY_SPARE)).isEqualTo(150);
+        assertThat(calculator.calculateScore(ONLY_SPARE)).isEqualTo(150);
     }
 
     @Test
     public void shouldReturn90GivenOnlySpare() {
-        assertThat(BowlingScoreCalculator.calculateScore(NO_STRIKE_NOR_SPARE)).isEqualTo(90);
+        assertThat(calculator.calculateScore(NO_STRIKE_NOR_SPARE)).isEqualTo(90);
     }
 
     @Test
     public void shouldReturn10FramesFor12Strikes() {
-        List<Frame> frames = BowlingScoreCalculator.determineFramesFormRolls(ONLY_STRIKE);
+        List<Frame> frames = BowlingScoreCalculator.determineFramesFromRolls(ONLY_STRIKE);
         assertThat(frames.size()).isEqualTo(10);
         assertThat(frames.get(0).nextRoll).isEqualTo(10);
         assertThat(frames.get(0).nextNextRoll).isEqualTo(10);
@@ -56,7 +57,7 @@ public class BowlingScoreCalculatorTest {
 
     @Test
     public void shouldReturn10FramesFor12Spares() {
-        List<Frame> frames = BowlingScoreCalculator.determineFramesFormRolls(ONLY_SPARE);
+        List<Frame> frames = BowlingScoreCalculator.determineFramesFromRolls(ONLY_SPARE);
         assertThat(frames.size()).isEqualTo(10);
         assertThat(frames.get(0).nextRoll).isEqualTo(5);
         assertThat(frames.get(0).nextNextRoll).isEqualTo(0);
@@ -66,7 +67,7 @@ public class BowlingScoreCalculatorTest {
 
     @Test
     public void shouldReturn10FramesFor20Rolls() {
-        List<Frame> frames = BowlingScoreCalculator.determineFramesFormRolls(NO_STRIKE_NOR_SPARE);
+        List<Frame> frames = BowlingScoreCalculator.determineFramesFromRolls(NO_STRIKE_NOR_SPARE);
         assertThat(frames.size()).isEqualTo(10);
         assertThat(frames.get(0).getFirstRoll()).isEqualTo(4);
         assertThat(frames.get(0).getSecondRoll()).isEqualTo(5);

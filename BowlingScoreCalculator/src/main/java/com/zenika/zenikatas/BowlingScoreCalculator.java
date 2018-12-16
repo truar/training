@@ -3,12 +3,12 @@ package com.zenika.zenikatas;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BowlingScoreCalculator {
+public class BowlingScoreCalculator implements ScoreCalculator {
 
     public static final int MAX_FRAMES_PER_GAME = 10;
 
-    public static int calculateScore(List<Integer> onlyStrike) {
-        List<Frame> frames = determineFramesFormRolls(onlyStrike);
+    public int calculateScore(List<Integer> rolls) {
+        List<Frame> frames = determineFramesFromRolls(rolls);
         int score = 0;
         for (Frame f : frames) {
             score += f.getScore();
@@ -16,11 +16,11 @@ public class BowlingScoreCalculator {
         return score;
     }
 
-    public static List<Frame> determineFramesFormRolls(List<Integer> rolls) {
+    public static List<Frame> determineFramesFromRolls(List<Integer> rolls) {
         List<Frame> frames = new ArrayList<>();
-
         Frame currentFrame = new Frame();
         int currentRollIndex = -1;
+
         for(int i = 0; i < MAX_FRAMES_PER_GAME; i++) {
             currentRollIndex = getCurrentRollIndexAndAddToFrame(rolls, currentFrame, currentRollIndex);
 
