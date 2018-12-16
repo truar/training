@@ -74,12 +74,12 @@ public class BowlingScoreCalculatorTest {
         assertThat(16).isEqualTo(calculateScore(rolls));
     }
 
-    private int calculateScore(List<Integer> rolls) {
+    private static int calculateScore(List<Integer> rolls) {
         int score = 0;
         int currentRoll = 0;
 
         for(Integer roll: rolls) {
-            if(isAStrike(roll)) {
+            if(roll == 10) {
                 int rollN1 = 0;
                 if(rolls.size() > currentRoll + 1) {
                     rollN1 = rolls.get(currentRoll + 1);
@@ -109,7 +109,7 @@ public class BowlingScoreCalculatorTest {
         int count = 0;
         for(Integer roll: rolls) {
             currentFrame.addRoll(roll);
-            if(isAStrike(roll)) {
+            if(currentFrame.isAStrike()) {
                 if(isTheLastFrame(count)) {
                     if(count == 12) {
                         frames.add(currentFrame);
@@ -134,10 +134,6 @@ public class BowlingScoreCalculatorTest {
 
     private boolean isTheLastFrame(int count) {
         return count >= 10;
-    }
-
-    private boolean isAStrike(Integer roll) {
-        return roll == 10;
     }
 
     @Test
@@ -203,20 +199,23 @@ public class BowlingScoreCalculatorTest {
     static class Frame {
         List<Integer> rolls = new ArrayList<>(3);
 
-        public int getFirstRoll() {
+        private boolean isAStrike() {
+            return getFirstRoll() == 10;
+        }
+
+        int getFirstRoll() {
             return rolls.get(0);
         }
 
-
-        public int getSecondRoll() {
+        int getSecondRoll() {
             return rolls.get(1);
         }
 
-        public int getBonusRoll() {
+        int getBonusRoll() {
             return rolls.get(2);
         }
 
-        public void addRoll(int roll) {
+        void addRoll(int roll) {
             rolls.add(roll);
         }
     }
