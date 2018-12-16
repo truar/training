@@ -105,19 +105,47 @@ public class BowlingScoreCalculatorTest {
     private List<Frame> getFrames(List<Integer> rolls) {
         List<Frame> frames = new ArrayList<>();
         Frame currentFrame = new Frame(0,0);
+        boolean roll1 = true;
         for(Integer roll: rolls) {
             if(roll == 10) {
                 currentFrame.firstRoll = roll;
                 frames.add(new Frame(roll, 0));
+            } else {
+                if(roll1) {
+                    currentFrame.firstRoll = roll;
+                    roll1 = false;
+                } else {
+                    currentFrame.secondRoll = roll;
+                    roll1 = true;
+                    frames.add(currentFrame);
+                    currentFrame = new Frame(0,0);
+                }
+
             }
         }
         return frames;
     }
 
     @Test
-    public void shouldReturnAFrameWithOneRoll() {
+    public void shouldReturnAListFramesWithOneFrameAndOneRoll() {
         List<Integer> rolls = new ArrayList<>();
         rolls.add(10);
+        assertThat(getFrames(rolls).size()).isEqualTo(1);
+    }
+
+    @Test
+    public void shouldReturnAListFramesWith2FramesAndOneRoll() {
+        List<Integer> rolls = new ArrayList<>();
+        rolls.add(10);
+        rolls.add(10);
+        assertThat(getFrames(rolls).size()).isEqualTo(2);
+    }
+
+    @Test
+    public void shouldReturnAListFramesWith1FrameAndTwoRoll() {
+        List<Integer> rolls = new ArrayList<>();
+        rolls.add(8);
+        rolls.add(2);
         assertThat(getFrames(rolls).size()).isEqualTo(1);
     }
 
