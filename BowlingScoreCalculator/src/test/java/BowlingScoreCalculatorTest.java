@@ -154,28 +154,18 @@ public class BowlingScoreCalculatorTest {
     }
 
     @Test
-    public void shouldReturnAListFramesWith2FrameAnd4Roll() {
-        List<Integer> rolls = new ArrayList<>();
-        rolls.add(8);
-        rolls.add(2);
-        rolls.add(6);
-        rolls.add(3);
-        List<Frame> frames = getFrames(rolls);
-        assertThat(frames.size()).isEqualTo(2);
-        assertThat(frames.get(0).getFirstRoll()).isEqualTo(8);
-        assertThat(frames.get(0).getSecondRoll()).isEqualTo(2);
-        assertThat(frames.get(1).getFirstRoll()).isEqualTo(6);
-        assertThat(frames.get(1).getSecondRoll()).isEqualTo(3);
-    }
-
-    @Test
     public void shouldReturn10FramesFor12Strikes() {
         assertThat(getFrames(ONLY_STRIKE).size()).isEqualTo(10);
     }
 
     @Test
     public void shouldReturn10FramesFor20Rolls() {
-        assertThat(getFrames(NO_STRIKE_NOR_SPARE).size()).isEqualTo(10);
+        List<Frame> frames = getFrames(NO_STRIKE_NOR_SPARE);
+        assertThat(frames.size()).isEqualTo(10);
+        assertThat(frames.get(0).getFirstRoll()).isEqualTo(4);
+        assertThat(frames.get(0).getSecondRoll()).isEqualTo(5);
+        assertThat(frames.get(1).getFirstRoll()).isEqualTo(4);
+        assertThat(frames.get(1).getSecondRoll()).isEqualTo(5);
     }
 
     @Test
