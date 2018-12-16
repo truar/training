@@ -52,31 +52,35 @@ public class BowlingScoreCalculatorTest {
 
     private List<Frame> determineFramesFormRolls(List<Integer> rolls) {
         List<Frame> frames = new ArrayList<>();
-        Frame currentFrame = new Frame();
         boolean roll1 = true;
 
-        for(int i = 0; i < rolls.size(); i++) {
-            int roll = rolls.get(i);
+        Frame currentFrame = new Frame();
+        int currentFrameIndex = 0;
+        int currentRollIndex = 0;
+        while(currentFrameIndex < 10) {
+            int roll = rolls.get(currentRollIndex);
             currentFrame.addRoll(roll);
             if(currentFrame.isAStrike()) {
-                currentFrame.nextRoll = rolls.get(i + 1);
-                currentFrame.nextNextRoll = rolls.get(i + 2);
+                currentFrame.nextRoll = rolls.get(currentRollIndex + 1);
+                currentFrame.nextNextRoll = rolls.get(currentRollIndex + 2);
                 currentFrame = addAndResetFrame(frames, currentFrame);
-                if(isTheLastFrame(i)) {
-                    break;
-                }
+                currentFrameIndex++;
             } else {
                 if(roll1) {
                     roll1 = false;
                 } else {
                     if(currentFrame.isASpare()) {
-                        currentFrame.nextRoll = rolls.get(i + 1);
+                        currentFrame.nextRoll = rolls.get(currentRollIndex + 1);
                     }
                     roll1 = true;
                     currentFrame = addAndResetFrame(frames, currentFrame);
+                    currentFrameIndex++;
                 }
             }
+            currentRollIndex++;
         }
+
+
         return frames;
     }
 
