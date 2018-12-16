@@ -25,7 +25,7 @@ function resetTimer {
 }
 
 function resetIfLastCommitChanged {
-	localLastCommit=$(git log --format=oneline | head -n 1 | cut -f 1 -d " ")
+	localLastCommit=$(eval $getLastCommitCommand)
 	if [ "$localLastCommit" != "$lastCommit" ]
 	then
 		echo -ne "\nLast commit changed from $lastCommit to $localLastCommit. "
@@ -43,7 +43,7 @@ function loopInfinitly {
 		if [ $timer = 0 ]
 		then
 			resetTimer
-			gitResetHard
+			echo "gitResetHard"
 		fi
 	done
 }
@@ -52,15 +52,17 @@ numberOfMinutes=$1
 
 if [ "$numberOfMinutes" = "" ]
 then
+	echo "No minutes provided. Using 2 minutes as a default timer"
 	numberOfMinutes=2
 fi
+echo -e "Timer set to $numberOfMinutes minutes. Have fun !"
+
 originalTimer=$(($numberOfMinutes * 60))
 resetTimer
 
 # Global last commit var.
 # If the commit changed, we reset the timer
-
-lastCommit=$(git log --format=oneline | head -n 1 | cut -f 1 -d " ")
-
+getLastCommitCommand="git log --format=oneline | head -n 1 | cut -f 1 -d \" \""
+lastCommit=$(eval $getLastCommitCommand)
 
 loopInfinitly
