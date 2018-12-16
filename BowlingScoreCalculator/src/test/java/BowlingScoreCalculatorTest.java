@@ -31,6 +31,15 @@ public class BowlingScoreCalculatorTest {
     }
 
     @Test
+    public void shouldReturn60forATripleStrike() {
+        List<Integer> rolls = new ArrayList<>();
+        rolls.add(10);
+        rolls.add(10);
+        rolls.add(10);
+        assertThat(60).isEqualTo(calculateScore(rolls));
+    }
+
+    @Test
     public void shouldReturn10forASpare() {
         List<Integer> rolls = new ArrayList<>();
         rolls.add(8);
@@ -49,11 +58,24 @@ public class BowlingScoreCalculatorTest {
 
     private int calculateScore(List<Integer> rolls) {
         int score = 0;
+        int currentRoll = 0;
         for(Integer roll: rolls) {
-            if(score == 10) {
+            if(roll == 10) {
+                int rollN1 = 0;
+                if(rolls.size() > currentRoll + 1) {
+                    rollN1 = rolls.get(currentRoll + 1);
+                }
+                int rollN2 = 0;
+                if(rolls.size() > currentRoll + 2) {
+                    rollN2 = rolls.get(currentRoll + 2);
+                }
+                score += rollN1 + rollN2;
+            }
+            else if(score == 10) {
                 score += roll;
             }
             score += roll;
+            currentRoll++;
         }
         return score;
     }
