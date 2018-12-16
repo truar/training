@@ -7,8 +7,7 @@ public class BowlingScoreCalculator {
 
     public static final int MAX_FRAMES_PER_GAME = 10;
 
-
-    static int calculateScore(List<Integer> onlyStrike) {
+    public static int calculateScore(List<Integer> onlyStrike) {
         List<Frame> frames = determineFramesFormRolls(onlyStrike);
         int score = 0;
         for (Frame f : frames) {
@@ -17,7 +16,7 @@ public class BowlingScoreCalculator {
         return score;
     }
 
-    static List<Frame> determineFramesFormRolls(List<Integer> rolls) {
+    public static List<Frame> determineFramesFormRolls(List<Integer> rolls) {
         List<Frame> frames = new ArrayList<>();
 
         Frame currentFrame = new Frame();
