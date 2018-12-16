@@ -26,7 +26,19 @@ public class BowlingScoreCalculatorTest {
         ONLY_SPARE.add(5);
     }
 
+    @Test
+    public void shouldReturn300GivenOnlyStrike() {
+        assertThat(calculateScore(ONLY_STRIKE)).isEqualTo(300);
+    }
 
+    private int calculateScore(List<Integer> onlyStrike) {
+        List<Frame> frames = getFrames(onlyStrike);
+        int score = 0;
+        for(Frame f : frames) {
+            score += f.getScore();
+        }
+        return score;
+    }
 
     private List<Frame> getFrames(List<Integer> rolls) {
         List<Frame> frames = new ArrayList<>();
