@@ -75,7 +75,6 @@ public class BowlingScoreCalculatorTest {
                     roll1 = true;
                     currentFrame = addAndResetFrame(frames, currentFrame);
                 }
-
             }
         }
         return frames;
