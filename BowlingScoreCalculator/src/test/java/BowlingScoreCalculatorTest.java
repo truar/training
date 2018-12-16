@@ -30,9 +30,21 @@ public class BowlingScoreCalculatorTest {
         assertThat(10).isEqualTo(calculateScore(rolls));
     }
 
+    @Test
+    public void shouldReturn16forASpareAndA3() {
+        List<Integer> rolls = new ArrayList<>();
+        rolls.add(8);
+        rolls.add(2);
+        rolls.add(3);
+        assertThat(16).isEqualTo(calculateScore(rolls));
+    }
+
     private int calculateScore(List<Integer> rolls) {
         int score = 0;
         for(Integer roll: rolls) {
+            if(score == 10) {
+                score += roll;
+            }
             score += roll;
         }
         return score;
