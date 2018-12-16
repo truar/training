@@ -16,7 +16,7 @@ public class BowlingScoreCalculatorTest {
         }
         for(int i = 0; i < 10; i++) {
             NO_STRIKE_NOR_SPARE.add(4);
-            NO_STRIKE_NOR_SPARE.add(4);
+            NO_STRIKE_NOR_SPARE.add(5);
         }
     }
 
