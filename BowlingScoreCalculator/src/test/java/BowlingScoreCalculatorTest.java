@@ -40,6 +40,24 @@ public class BowlingScoreCalculatorTest {
     }
 
     @Test
+    public void shouldReturn300for12Strikes() {
+        List<Integer> rolls = new ArrayList<>();
+        rolls.add(10);
+        rolls.add(10);
+        rolls.add(10);
+        rolls.add(10);
+        rolls.add(10);
+        rolls.add(10);
+        rolls.add(10);
+        rolls.add(10);
+        rolls.add(10);
+        rolls.add(10);
+        rolls.add(10);
+        rolls.add(10);
+        assertThat(300).isEqualTo(calculateScore(rolls));
+    }
+
+    @Test
     public void shouldReturn10forASpare() {
         List<Integer> rolls = new ArrayList<>();
         rolls.add(8);
@@ -76,6 +94,9 @@ public class BowlingScoreCalculatorTest {
             }
             score += roll;
             currentRoll++;
+            if(currentRoll == 10) {
+                break;
+            }
         }
         return score;
     }
