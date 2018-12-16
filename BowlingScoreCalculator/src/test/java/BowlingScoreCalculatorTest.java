@@ -106,10 +106,27 @@ public class BowlingScoreCalculatorTest {
         List<Frame> frames = new ArrayList<>();
         Frame currentFrame = new Frame(0,0);
         boolean roll1 = true;
+        boolean roll2 = false;
+        int count = 0;
         for(Integer roll: rolls) {
             if(roll == 10) {
-                currentFrame.firstRoll = roll;
-                frames.add(new Frame(roll, 0));
+                if(count >= 10) {
+                    if(roll1) {
+                        currentFrame.firstRoll = roll;
+                        roll1 = false;
+                        roll2 = true;
+                    } else if(roll2) {
+                        currentFrame.secondRoll = roll;
+                        roll2 = false;
+                    } else {
+                        currentFrame.bonusRoll = roll;
+                        roll1 = true;
+                        roll2 = false;
+                        frames.add(currentFrame);
+                    }
+                } else {
+                    frames.add(new Frame(roll, 0));
+                }
             } else {
                 if(roll1) {
                     currentFrame.firstRoll = roll;
@@ -122,6 +139,7 @@ public class BowlingScoreCalculatorTest {
                 }
 
             }
+            count++;
         }
         return frames;
     }
@@ -167,13 +185,39 @@ public class BowlingScoreCalculatorTest {
         assertThat(frames.get(1).secondRoll).isEqualTo(3);
     }
 
+    @Test
+    public void shouldReturn10FramesFor12Strikes() {
+        List<Integer> rolls = new ArrayList<>();
+        rolls.add(10);
+        rolls.add(10);
+        rolls.add(10);
+        rolls.add(10);
+        rolls.add(10);
+        rolls.add(10);
+        rolls.add(10);
+        rolls.add(10);
+        rolls.add(10);
+        rolls.add(10);
+        rolls.add(10);
+        rolls.add(10);
+        assertThat(getFrames(rolls).size()).isEqualTo(10);
+    }
+
+
     static class Frame {
         int firstRoll;
         int secondRoll;
+        int bonusRoll;
 
         Frame(int firstRoll, int secondRoll) {
+            this(firstRoll, secondRoll, 0);
+        }
+
+
+        Frame(int firstRoll, int secondRoll, int bonusRoll) {
             this.firstRoll = firstRoll;
             this.secondRoll = secondRoll;
+            this.bonusRoll = bonusRoll;
         }
     }
 
