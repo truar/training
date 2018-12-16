@@ -109,8 +109,8 @@ public class BowlingScoreCalculatorTest {
     }
 
     static class Frame {
-        private int firstRoll;
-        private int secondRoll;
+        int firstRoll;
+        int secondRoll;
 
         Frame(int firstRoll, int secondRoll) {
             this.firstRoll = firstRoll;
