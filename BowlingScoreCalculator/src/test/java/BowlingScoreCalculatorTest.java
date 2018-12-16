@@ -23,6 +23,7 @@ public class BowlingScoreCalculatorTest {
             ONLY_SPARE.add(5);
             ONLY_SPARE.add(5);
         }
+        ONLY_SPARE.add(5);
     }
 
     @Test
@@ -141,6 +142,9 @@ public class BowlingScoreCalculatorTest {
                 if(roll1) {
                     roll1 = false;
                 } else {
+                    if(currentFrame.isASpare()) {
+                        currentFrame.nextRoll = rolls.get(i + 1);
+                    }
                     roll1 = true;
                     frames.add(currentFrame);
                     currentFrame = new Frame();
@@ -163,6 +167,16 @@ public class BowlingScoreCalculatorTest {
         assertThat(frames.get(0).nextNextRoll).isEqualTo(10);
         assertThat(frames.get(9).nextRoll).isEqualTo(10);
         assertThat(frames.get(9).nextNextRoll).isEqualTo(10);
+    }
+
+    @Test
+    public void shouldReturn10FramesFor12Spares() {
+        List<Frame> frames = getFrames(ONLY_SPARE);
+        assertThat(frames.size()).isEqualTo(10);
+        assertThat(frames.get(0).nextRoll).isEqualTo(5);
+        assertThat(frames.get(0).nextNextRoll).isEqualTo(0);
+        assertThat(frames.get(9).nextRoll).isEqualTo(5);
+        assertThat(frames.get(9).nextNextRoll).isEqualTo(0);
     }
 
     @Test
