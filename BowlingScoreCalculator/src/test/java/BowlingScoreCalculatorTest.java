@@ -112,14 +112,14 @@ public class BowlingScoreCalculatorTest {
             if(isAStrike(roll)) {
                 if(isTheLastFrame(count)) {
                     if(roll1) {
-                        currentFrame.firstRoll = roll;
+                        currentFrame.setFirstRoll(roll);
                         roll1 = false;
                         roll2 = true;
                     } else if(roll2) {
-                        currentFrame.secondRoll = roll;
+                        currentFrame.setSecondRoll(roll);
                         roll2 = false;
                     } else {
-                        currentFrame.bonusRoll = roll;
+                        currentFrame.setBonusRoll(roll);
                         roll1 = true;
                         roll2 = false;
                         frames.add(currentFrame);
@@ -129,10 +129,10 @@ public class BowlingScoreCalculatorTest {
                 }
             } else {
                 if(roll1) {
-                    currentFrame.firstRoll = roll;
+                    currentFrame.setFirstRoll(roll);
                     roll1 = false;
                 } else {
-                    currentFrame.secondRoll = roll;
+                    currentFrame.setSecondRoll(roll);
                     roll1 = true;
                     frames.add(currentFrame);
                     currentFrame = new Frame(0,0);
@@ -222,7 +222,6 @@ public class BowlingScoreCalculatorTest {
             this(firstRoll, secondRoll, 0);
         }
 
-
         Frame(int firstRoll, int secondRoll, int bonusRoll) {
             this.firstRoll = firstRoll;
             this.secondRoll = secondRoll;
@@ -230,6 +229,30 @@ public class BowlingScoreCalculatorTest {
             this.rolls.add(firstRoll);
             this.rolls.add(secondRoll);
             this.rolls.add(bonusRoll);
+        }
+
+        public int getFirstRoll() {
+            return firstRoll;
+        }
+
+        public void setFirstRoll(int firstRoll) {
+            this.firstRoll = firstRoll;
+        }
+
+        public int getSecondRoll() {
+            return secondRoll;
+        }
+
+        public void setSecondRoll(int secondRoll) {
+            this.secondRoll = secondRoll;
+        }
+
+        public int getBonusRoll() {
+            return bonusRoll;
+        }
+
+        public void setBonusRoll(int bonusRoll) {
+            this.bonusRoll = bonusRoll;
         }
     }
 
