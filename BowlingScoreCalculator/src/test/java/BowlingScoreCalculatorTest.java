@@ -14,27 +14,9 @@ public class BowlingScoreCalculatorTest {
         for(int i = 0; i < 12; i++) {
             ONLY_STRIKE.add(10);
         }
-
-        NO_STRIKE_NOR_SPARE.add(4);
-        NO_STRIKE_NOR_SPARE.add(4);
-        NO_STRIKE_NOR_SPARE.add(4);
-        NO_STRIKE_NOR_SPARE.add(4);
-        NO_STRIKE_NOR_SPARE.add(4);
-        NO_STRIKE_NOR_SPARE.add(4);
-        NO_STRIKE_NOR_SPARE.add(4);
-        NO_STRIKE_NOR_SPARE.add(4);
-        NO_STRIKE_NOR_SPARE.add(4);
-        NO_STRIKE_NOR_SPARE.add(4);
-        NO_STRIKE_NOR_SPARE.add(4);
-        NO_STRIKE_NOR_SPARE.add(4);
-        NO_STRIKE_NOR_SPARE.add(4);
-        NO_STRIKE_NOR_SPARE.add(4);
-        NO_STRIKE_NOR_SPARE.add(4);
-        NO_STRIKE_NOR_SPARE.add(4);
-        NO_STRIKE_NOR_SPARE.add(4);
-        NO_STRIKE_NOR_SPARE.add(4);
-        NO_STRIKE_NOR_SPARE.add(4);
-        NO_STRIKE_NOR_SPARE.add(4);
+        for(int i = 0; i < 20; i++) {
+            NO_STRIKE_NOR_SPARE.add(4);
+        }
     }
 
     @Test
