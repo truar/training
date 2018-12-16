@@ -129,13 +129,12 @@ public class BowlingScoreCalculatorTest {
             int roll = rolls.get(i);
             currentFrame.addRoll(roll);
             if(currentFrame.isAStrike()) {
+                currentFrame.nextRoll = rolls.get(i + 1);
+                currentFrame.nextNextRoll = rolls.get(i + 2);
+                frames.add(currentFrame);
                 if(isTheLastFrame(i)) {
-                    currentFrame.nextRoll = rolls.get(i + 1);
-                    currentFrame.nextNextRoll = rolls.get(i + 2);
-                    frames.add(currentFrame);
                     break;
                 } else {
-                    frames.add(currentFrame);
                     currentFrame = new Frame();
                 }
             } else {
@@ -158,7 +157,10 @@ public class BowlingScoreCalculatorTest {
 
     @Test
     public void shouldReturn10FramesFor12Strikes() {
-        assertThat(getFrames(ONLY_STRIKE).size()).isEqualTo(10);
+        List<Frame> frames = getFrames(ONLY_STRIKE);
+        assertThat(frames.size()).isEqualTo(10);
+        assertThat(frames.get(0).nextRoll).isEqualTo(10);
+        assertThat(frames.get(0).nextNextRoll).isEqualTo(10);
     }
 
     @Test
