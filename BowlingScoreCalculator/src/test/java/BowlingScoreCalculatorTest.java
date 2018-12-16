@@ -133,10 +133,9 @@ public class BowlingScoreCalculatorTest {
                 currentFrame.nextRoll = rolls.get(i + 1);
                 currentFrame.nextNextRoll = rolls.get(i + 2);
                 frames.add(currentFrame);
+                currentFrame = new Frame();
                 if(isTheLastFrame(i)) {
                     break;
-                } else {
-                    currentFrame = new Frame();
                 }
             } else {
                 if(roll1) {
