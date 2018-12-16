@@ -120,7 +120,8 @@ public class BowlingScoreCalculatorTest {
         Frame currentFrame = new Frame();
         boolean roll1 = true;
         int count = 0;
-        for(Integer roll: rolls) {
+        for(int i = 0; i < rolls.size(); i++) {
+            int roll = rolls.get(i);
             currentFrame.addRoll(roll);
             if(currentFrame.isAStrike()) {
                 if(isTheLastFrame(count)) {
