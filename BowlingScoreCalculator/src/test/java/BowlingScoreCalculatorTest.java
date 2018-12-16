@@ -110,7 +110,7 @@ public class BowlingScoreCalculatorTest {
         int count = 0;
         for(Integer roll: rolls) {
             if(isAStrike(roll)) {
-                if(count >= 10) {
+                if(isTheLastFrame(count)) {
                     if(roll1) {
                         currentFrame.firstRoll = roll;
                         roll1 = false;
@@ -142,6 +142,10 @@ public class BowlingScoreCalculatorTest {
             count++;
         }
         return frames;
+    }
+
+    private boolean isTheLastFrame(int count) {
+        return count >= 10;
     }
 
     private boolean isAStrike(Integer roll) {
@@ -209,6 +213,7 @@ public class BowlingScoreCalculatorTest {
 
 
     static class Frame {
+        List<Integer> rolls = new ArrayList<>(3);
         int firstRoll;
         int secondRoll;
         int bonusRoll;
