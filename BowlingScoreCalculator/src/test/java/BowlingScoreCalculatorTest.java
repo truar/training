@@ -100,4 +100,15 @@ public class BowlingScoreCalculatorTest {
         }
         return score;
     }
+
+    public static class Frame {
+        public int firstRoll;
+        public int secondRoll;
+
+        public Frame(int firstRoll, int secondRoll) {
+            this.firstRoll = firstRoll;
+            this.secondRoll = secondRoll;
+        }
+    }
+
 }
