@@ -132,8 +132,7 @@ public class BowlingScoreCalculatorTest {
             if(currentFrame.isAStrike()) {
                 currentFrame.nextRoll = rolls.get(i + 1);
                 currentFrame.nextNextRoll = rolls.get(i + 2);
-                frames.add(currentFrame);
-                currentFrame = new Frame();
+                currentFrame = addAndResetFrame(frames, currentFrame);
                 if(isTheLastFrame(i)) {
                     break;
                 }
@@ -145,13 +144,18 @@ public class BowlingScoreCalculatorTest {
                         currentFrame.nextRoll = rolls.get(i + 1);
                     }
                     roll1 = true;
-                    frames.add(currentFrame);
-                    currentFrame = new Frame();
+                    currentFrame = addAndResetFrame(frames, currentFrame);
                 }
 
             }
         }
         return frames;
+    }
+
+    private Frame addAndResetFrame(List<Frame> frames, Frame currentFrame) {
+        frames.add(currentFrame);
+        currentFrame = new Frame();
+        return currentFrame;
     }
 
     private boolean isTheLastFrame(int count) {
