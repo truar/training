@@ -52,7 +52,6 @@ public class BowlingScoreCalculatorTest {
 
     private List<Frame> determineFramesFormRolls(List<Integer> rolls) {
         List<Frame> frames = new ArrayList<>();
-        boolean roll1 = true;
 
         Frame currentFrame = new Frame();
         int currentFrameIndex = 0;
