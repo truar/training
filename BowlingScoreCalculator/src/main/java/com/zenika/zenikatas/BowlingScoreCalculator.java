@@ -5,9 +5,13 @@ import java.util.List;
 
 public class BowlingScoreCalculator implements ScoreCalculator {
 
-    public static final int MAX_FRAMES_PER_GAME = 10;
+    private static final int MAX_FRAMES_PER_GAME = 10;
 
-    public List<Integer> rolls = new ArrayList<>();
+    private List<Integer> rolls;
+
+    public BowlingScoreCalculator(List<Integer> rolls) {
+        this.rolls = rolls;
+    }
 
     public int calculateScore() {
         List<Frame> frames = determineFramesFromRolls();

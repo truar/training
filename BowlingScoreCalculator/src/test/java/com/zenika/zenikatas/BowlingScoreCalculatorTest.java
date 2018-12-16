@@ -28,29 +28,29 @@ public class BowlingScoreCalculatorTest {
         ONLY_SPARE.add(5);
     }
 
-    private BowlingScoreCalculator calculator = new BowlingScoreCalculator();
+    private BowlingScoreCalculator calculator;
 
     @Test
     public void shouldReturn300GivenOnlyStrike() {
-        calculator.rolls = ONLY_STRIKE;
+        calculator = new BowlingScoreCalculator(ONLY_STRIKE);
         assertThat(calculator.calculateScore()).isEqualTo(300);
     }
 
     @Test
     public void shouldReturn150GivenOnlySpare() {
-        calculator.rolls = ONLY_SPARE;
+        calculator = new BowlingScoreCalculator(ONLY_SPARE);
         assertThat(calculator.calculateScore()).isEqualTo(150);
     }
 
     @Test
     public void shouldReturn90GivenOnlySpare() {
-        calculator.rolls = NO_STRIKE_NOR_SPARE;
+        calculator = new BowlingScoreCalculator(NO_STRIKE_NOR_SPARE);
         assertThat(calculator.calculateScore()).isEqualTo(90);
     }
 
     @Test
     public void shouldReturn10FramesFor12Strikes() {
-        calculator.rolls = ONLY_STRIKE;
+        calculator = new BowlingScoreCalculator(ONLY_STRIKE);
         List<Frame> frames = calculator.determineFramesFromRolls();
         assertThat(frames.size()).isEqualTo(10);
         assertThat(frames.get(0).nextRoll).isEqualTo(10);
@@ -61,7 +61,7 @@ public class BowlingScoreCalculatorTest {
 
     @Test
     public void shouldReturn10FramesFor12Spares() {
-        calculator.rolls = ONLY_SPARE;
+        calculator = new BowlingScoreCalculator(ONLY_SPARE);
         List<Frame> frames = calculator.determineFramesFromRolls();
         assertThat(frames.size()).isEqualTo(10);
         assertThat(frames.get(0).nextRoll).isEqualTo(5);
@@ -72,7 +72,7 @@ public class BowlingScoreCalculatorTest {
 
     @Test
     public void shouldReturn10FramesFor20Rolls() {
-        calculator.rolls = NO_STRIKE_NOR_SPARE;
+        calculator = new BowlingScoreCalculator(NO_STRIKE_NOR_SPARE);
         List<Frame> frames = calculator.determineFramesFromRolls();
         assertThat(frames.size()).isEqualTo(10);
         assertThat(frames.get(0).getFirstRoll()).isEqualTo(4);
