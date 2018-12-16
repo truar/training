@@ -7,8 +7,10 @@ public class BowlingScoreCalculator implements ScoreCalculator {
 
     public static final int MAX_FRAMES_PER_GAME = 10;
 
-    public int calculateScore(List<Integer> rolls) {
-        List<Frame> frames = determineFramesFromRolls(rolls);
+    public List<Integer> rolls = new ArrayList<>();
+
+    public int calculateScore() {
+        List<Frame> frames = determineFramesFromRolls();
         int score = 0;
         for (Frame f : frames) {
             score += f.getScore();
@@ -16,7 +18,7 @@ public class BowlingScoreCalculator implements ScoreCalculator {
         return score;
     }
 
-    public static List<Frame> determineFramesFromRolls(List<Integer> rolls) {
+    public List<Frame> determineFramesFromRolls() {
         List<Frame> frames = new ArrayList<>();
         Frame currentFrame = new Frame();
         int currentRollIndex = -1;
@@ -40,13 +42,13 @@ public class BowlingScoreCalculator implements ScoreCalculator {
         return frames;
     }
 
-    private static int getCurrentRollIndexAndAddToFrame(List<Integer> rolls, Frame currentFrame, int currentRollIndex) {
+    private int getCurrentRollIndexAndAddToFrame(List<Integer> rolls, Frame currentFrame, int currentRollIndex) {
         currentRollIndex++;
         currentFrame.addRoll(rolls.get(currentRollIndex));
         return currentRollIndex;
     }
 
-    private static Frame addAndResetFrame(List<Frame> frames, Frame currentFrame) {
+    private Frame addAndResetFrame(List<Frame> frames, Frame currentFrame) {
         frames.add(currentFrame);
         return new Frame();
     }

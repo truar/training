@@ -32,22 +32,26 @@ public class BowlingScoreCalculatorTest {
 
     @Test
     public void shouldReturn300GivenOnlyStrike() {
-        assertThat(calculator.calculateScore(ONLY_STRIKE)).isEqualTo(300);
+        calculator.rolls = ONLY_STRIKE;
+        assertThat(calculator.calculateScore()).isEqualTo(300);
     }
 
     @Test
     public void shouldReturn150GivenOnlySpare() {
-        assertThat(calculator.calculateScore(ONLY_SPARE)).isEqualTo(150);
+        calculator.rolls = ONLY_SPARE;
+        assertThat(calculator.calculateScore()).isEqualTo(150);
     }
 
     @Test
     public void shouldReturn90GivenOnlySpare() {
-        assertThat(calculator.calculateScore(NO_STRIKE_NOR_SPARE)).isEqualTo(90);
+        calculator.rolls = NO_STRIKE_NOR_SPARE;
+        assertThat(calculator.calculateScore()).isEqualTo(90);
     }
 
     @Test
     public void shouldReturn10FramesFor12Strikes() {
-        List<Frame> frames = BowlingScoreCalculator.determineFramesFromRolls(ONLY_STRIKE);
+        calculator.rolls = ONLY_STRIKE;
+        List<Frame> frames = calculator.determineFramesFromRolls();
         assertThat(frames.size()).isEqualTo(10);
         assertThat(frames.get(0).nextRoll).isEqualTo(10);
         assertThat(frames.get(0).nextNextRoll).isEqualTo(10);
@@ -57,7 +61,8 @@ public class BowlingScoreCalculatorTest {
 
     @Test
     public void shouldReturn10FramesFor12Spares() {
-        List<Frame> frames = BowlingScoreCalculator.determineFramesFromRolls(ONLY_SPARE);
+        calculator.rolls = ONLY_SPARE;
+        List<Frame> frames = calculator.determineFramesFromRolls();
         assertThat(frames.size()).isEqualTo(10);
         assertThat(frames.get(0).nextRoll).isEqualTo(5);
         assertThat(frames.get(0).nextNextRoll).isEqualTo(0);
@@ -67,7 +72,8 @@ public class BowlingScoreCalculatorTest {
 
     @Test
     public void shouldReturn10FramesFor20Rolls() {
-        List<Frame> frames = BowlingScoreCalculator.determineFramesFromRolls(NO_STRIKE_NOR_SPARE);
+        calculator.rolls = NO_STRIKE_NOR_SPARE;
+        List<Frame> frames = calculator.determineFramesFromRolls();
         assertThat(frames.size()).isEqualTo(10);
         assertThat(frames.get(0).getFirstRoll()).isEqualTo(4);
         assertThat(frames.get(0).getSecondRoll()).isEqualTo(5);
