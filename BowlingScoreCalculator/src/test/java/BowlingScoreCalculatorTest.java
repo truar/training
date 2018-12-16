@@ -57,13 +57,13 @@ public class BowlingScoreCalculatorTest {
         Frame currentFrame = new Frame();
         int currentRollIndex = -1;
         for(int i = 0; i < MAX_FRAMES_PER_GAME; i++) {
-            currentRollIndex = getCurrentRollIndexAndAddFrame(rolls, currentFrame, currentRollIndex);
+            currentRollIndex = getCurrentRollIndexAndAddToFrame(rolls, currentFrame, currentRollIndex);
 
             if (currentFrame.isAStrike()) {
                 currentFrame.setNext2Rolls(rolls.get(currentRollIndex + 1), rolls.get(currentRollIndex + 2));
                 currentFrame = addAndResetFrame(frames, currentFrame);
             } else {
-                currentRollIndex = getCurrentRollIndexAndAddFrame(rolls, currentFrame, currentRollIndex);
+                currentRollIndex = getCurrentRollIndexAndAddToFrame(rolls, currentFrame, currentRollIndex);
 
                 if (currentFrame.isASpare()) {
                     currentFrame.setNextRoll(rolls.get(currentRollIndex + 1));
@@ -75,7 +75,7 @@ public class BowlingScoreCalculatorTest {
         return frames;
     }
 
-    private int getCurrentRollIndexAndAddFrame(List<Integer> rolls, Frame currentFrame, int currentRollIndex) {
+    private int getCurrentRollIndexAndAddToFrame(List<Integer> rolls, Frame currentFrame, int currentRollIndex) {
         currentRollIndex++;
         currentFrame.addRoll(rolls.get(currentRollIndex));
         return currentRollIndex;
@@ -152,7 +152,7 @@ public class BowlingScoreCalculatorTest {
         }
 
         int getSecondRoll() {
-            return rolls.get(1);
+            return (rolls.size() < 2) ? 0 : rolls.get(1);
         }
 
         void addRoll(int roll) {
@@ -160,12 +160,7 @@ public class BowlingScoreCalculatorTest {
         }
 
         int getScore() {
-            if (isAStrike()) {
-                return getFirstRoll() + nextNextRoll + nextRoll;
-            } else if (isASpare()) {
-                return getFirstRoll() + getSecondRoll() + nextRoll;
-            }
-            return getFirstRoll() + getSecondRoll();
+            return getFirstRoll() + getSecondRoll() + nextRoll + nextNextRoll;
         }
 
         private void setNext2Rolls(Integer nextRoll, Integer nextNextRoll) {
