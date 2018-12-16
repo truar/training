@@ -250,9 +250,19 @@ public class BowlingScoreCalculatorTest {
         assertThat(getFrames(rolls).size()).isEqualTo(10);
     }
 
+    @Test
+    public void shouldCalculateTheScoreOfAStrikeWithTheNext2Rolls() {
+        Frame frame = new Frame();
+        frame.addRoll(10);
+        frame.nextRoll = 2;
+        frame.nextNextRoll = 9;
+        assertThat(frame.getScore()).isEqualTo(21);
+    }
 
     static class Frame {
         List<Integer> rolls = new ArrayList<>(3);
+        int nextRoll = 0;
+        int nextNextRoll = 0;
 
         private boolean isAStrike() {
             return getFirstRoll() == 10;
@@ -275,6 +285,9 @@ public class BowlingScoreCalculatorTest {
         }
 
         int getScore() {
+            if(isAStrike()) {
+                return getFirstRoll() + nextNextRoll + nextRoll;
+            }
             return getFirstRoll() + getSecondRoll() + getBonusRoll();
         }
     }
