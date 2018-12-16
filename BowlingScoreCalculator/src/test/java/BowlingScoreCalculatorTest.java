@@ -66,7 +66,7 @@ public class BowlingScoreCalculatorTest {
                 currentRollIndex = getCurrentRollIndexAndAddFrame(rolls, currentFrame, currentRollIndex);
 
                 if (currentFrame.isASpare()) {
-                    currentFrame.setNext2Rolls(rolls.get(currentRollIndex + 1), 0);
+                    currentFrame.setNextRoll(rolls.get(currentRollIndex + 1));
                 }
                 currentFrame = addAndResetFrame(frames, currentFrame);
             }
@@ -175,6 +175,10 @@ public class BowlingScoreCalculatorTest {
         private void setNext2Rolls(Integer nextRoll, Integer nextNextRoll) {
             this.nextRoll = nextRoll;
             this.nextNextRoll = nextNextRoll;
+        }
+
+        private void setNextRoll(Integer nextRoll) {
+            this.setNext2Rolls(nextRoll, 0);
         }
     }
 
