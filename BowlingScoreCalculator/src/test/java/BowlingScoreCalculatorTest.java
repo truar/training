@@ -77,6 +77,12 @@ public class BowlingScoreCalculatorTest {
     private int calculateScore(List<Integer> rolls) {
         int score = 0;
         int currentRoll = 0;
+
+        List<Frame> frames = new ArrayList<>();
+        for(Integer roll: rolls) {
+            frames.add(new Frame(roll, 0));
+        }
+
         for(Integer roll: rolls) {
             if(roll == 10) {
                 int rollN1 = 0;
