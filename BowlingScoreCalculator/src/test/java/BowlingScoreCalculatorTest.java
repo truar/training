@@ -42,7 +42,7 @@ public class BowlingScoreCalculatorTest {
     }
 
     private int calculateScore(List<Integer> onlyStrike) {
-        List<Frame> frames = getFrames(onlyStrike);
+        List<Frame> frames = determineFramesFormRolls(onlyStrike);
         int score = 0;
         for(Frame f : frames) {
             score += f.getScore();
@@ -50,7 +50,7 @@ public class BowlingScoreCalculatorTest {
         return score;
     }
 
-    private List<Frame> getFrames(List<Integer> rolls) {
+    private List<Frame> determineFramesFormRolls(List<Integer> rolls) {
         List<Frame> frames = new ArrayList<>();
         Frame currentFrame = new Frame();
         boolean roll1 = true;
@@ -92,7 +92,7 @@ public class BowlingScoreCalculatorTest {
 
     @Test
     public void shouldReturn10FramesFor12Strikes() {
-        List<Frame> frames = getFrames(ONLY_STRIKE);
+        List<Frame> frames = determineFramesFormRolls(ONLY_STRIKE);
         assertThat(frames.size()).isEqualTo(10);
         assertThat(frames.get(0).nextRoll).isEqualTo(10);
         assertThat(frames.get(0).nextNextRoll).isEqualTo(10);
@@ -102,7 +102,7 @@ public class BowlingScoreCalculatorTest {
 
     @Test
     public void shouldReturn10FramesFor12Spares() {
-        List<Frame> frames = getFrames(ONLY_SPARE);
+        List<Frame> frames = determineFramesFormRolls(ONLY_SPARE);
         assertThat(frames.size()).isEqualTo(10);
         assertThat(frames.get(0).nextRoll).isEqualTo(5);
         assertThat(frames.get(0).nextNextRoll).isEqualTo(0);
@@ -112,7 +112,7 @@ public class BowlingScoreCalculatorTest {
 
     @Test
     public void shouldReturn10FramesFor20Rolls() {
-        List<Frame> frames = getFrames(NO_STRIKE_NOR_SPARE);
+        List<Frame> frames = determineFramesFormRolls(NO_STRIKE_NOR_SPARE);
         assertThat(frames.size()).isEqualTo(10);
         assertThat(frames.get(0).getFirstRoll()).isEqualTo(4);
         assertThat(frames.get(0).getSecondRoll()).isEqualTo(5);
