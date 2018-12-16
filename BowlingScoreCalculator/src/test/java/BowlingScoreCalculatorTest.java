@@ -61,18 +61,14 @@ public class BowlingScoreCalculatorTest {
             currentRollIndex = getCurrentRollIndexAndAddFrame(rolls, currentFrame, currentRollIndex);
 
             if (currentFrame.isAStrike()) {
-                int nextRoll = rolls.get(currentRollIndex + 1);
-                int nextNextRoll = rolls.get(currentRollIndex + 2);
-                currentFrame.nextRoll = nextRoll;
-                currentFrame.nextNextRoll = nextNextRoll;
+                setNext2Rolls(rolls, currentFrame, currentRollIndex, rolls.get(currentRollIndex + 2));
                 currentFrame = addAndResetFrame(frames, currentFrame);
                 currentFrameIndex++;
             } else {
                 currentRollIndex = getCurrentRollIndexAndAddFrame(rolls, currentFrame, currentRollIndex);
 
                 if (currentFrame.isASpare()) {
-                    int nextRoll = rolls.get(currentRollIndex + 1);
-                    currentFrame.nextRoll = nextRoll;
+                    setNext2Rolls(rolls, currentFrame, currentRollIndex, 0);
                 }
                 currentFrame = addAndResetFrame(frames, currentFrame);
                 currentFrameIndex++;
@@ -81,6 +77,13 @@ public class BowlingScoreCalculatorTest {
         }
 
         return frames;
+    }
+
+    private void setNext2Rolls(List<Integer> rolls, Frame currentFrame, int currentRollIndex, Integer integer) {
+        int nextRoll = rolls.get(currentRollIndex + 1);
+        int nextNextRoll = integer;
+        currentFrame.nextRoll = nextRoll;
+        currentFrame.nextNextRoll = nextNextRoll;
     }
 
     private int getCurrentRollIndexAndAddFrame(List<Integer> rolls, Frame currentFrame, int currentRollIndex) {
