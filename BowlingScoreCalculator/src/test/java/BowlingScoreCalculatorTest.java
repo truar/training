@@ -227,6 +227,9 @@ public class BowlingScoreCalculatorTest {
             this.firstRoll = firstRoll;
             this.secondRoll = secondRoll;
             this.bonusRoll = bonusRoll;
+            this.rolls.add(firstRoll);
+            this.rolls.add(secondRoll);
+            this.rolls.add(bonusRoll);
         }
     }
 
