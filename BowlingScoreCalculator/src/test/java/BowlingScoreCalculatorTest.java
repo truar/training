@@ -9,6 +9,7 @@ public class BowlingScoreCalculatorTest {
 
     private static final List<Integer> ONLY_STRIKE = new ArrayList<>();
     private static final List<Integer> NO_STRIKE_NOR_SPARE = new ArrayList<>();
+    private static final List<Integer> ONLY_SPARE = new ArrayList<>();
 
     static {
         for(int i = 0; i < 12; i++) {
@@ -17,6 +18,10 @@ public class BowlingScoreCalculatorTest {
         for(int i = 0; i < 10; i++) {
             NO_STRIKE_NOR_SPARE.add(4);
             NO_STRIKE_NOR_SPARE.add(5);
+        }
+        for(int i = 0; i < 10; i++) {
+            ONLY_SPARE.add(5);
+            ONLY_SPARE.add(5);
         }
     }
 
