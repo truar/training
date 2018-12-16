@@ -54,9 +54,8 @@ public class BowlingScoreCalculatorTest {
         List<Frame> frames = new ArrayList<>();
 
         Frame currentFrame = new Frame();
-        int currentFrameIndex = 0;
         int currentRollIndex = -1;
-        while (currentFrameIndex < 10) {
+        for(int i = 0; i < 10; i++) {
             currentRollIndex = getCurrentRollIndexAndAddFrame(rolls, currentFrame, currentRollIndex);
 
             if (currentFrame.isAStrike()) {
@@ -70,8 +69,6 @@ public class BowlingScoreCalculatorTest {
                 }
                 currentFrame = addAndResetFrame(frames, currentFrame);
             }
-            currentFrameIndex++;
-
         }
 
         return frames;
