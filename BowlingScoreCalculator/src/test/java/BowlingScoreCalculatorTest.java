@@ -6,6 +6,10 @@ public class BowlingScoreCalculatorTest {
 
     @Test
     public void shouldReturnTheRollScore() {
-        assertThat(1).isEqualTo(1);
+        assertThat(8).isEqualTo(calculateScore(8));
+    }
+
+    private int calculateScore(int roll) {
+        return roll;
     }
 }
