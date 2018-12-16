@@ -44,7 +44,7 @@ public class BowlingScoreCalculatorTest {
         assertThat(calculateScore(NO_STRIKE_NOR_SPARE)).isEqualTo(90);
     }
 
-    private int calculateScore(List<Integer> onlyStrike) {
+    private static int calculateScore(List<Integer> onlyStrike) {
         List<Frame> frames = determineFramesFormRolls(onlyStrike);
         int score = 0;
         for (Frame f : frames) {
@@ -53,7 +53,7 @@ public class BowlingScoreCalculatorTest {
         return score;
     }
 
-    private List<Frame> determineFramesFormRolls(List<Integer> rolls) {
+    private static List<Frame> determineFramesFormRolls(List<Integer> rolls) {
         List<Frame> frames = new ArrayList<>();
 
         Frame currentFrame = new Frame();
@@ -77,7 +77,7 @@ public class BowlingScoreCalculatorTest {
         return frames;
     }
 
-    private int getCurrentRollIndexAndAddToFrame(List<Integer> rolls, Frame currentFrame, int currentRollIndex) {
+    private static int getCurrentRollIndexAndAddToFrame(List<Integer> rolls, Frame currentFrame, int currentRollIndex) {
         currentRollIndex++;
         currentFrame.addRoll(rolls.get(currentRollIndex));
         return currentRollIndex;
