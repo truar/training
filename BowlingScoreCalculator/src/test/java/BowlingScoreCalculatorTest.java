@@ -161,6 +161,8 @@ public class BowlingScoreCalculatorTest {
         assertThat(frames.size()).isEqualTo(10);
         assertThat(frames.get(0).nextRoll).isEqualTo(10);
         assertThat(frames.get(0).nextNextRoll).isEqualTo(10);
+        assertThat(frames.get(9).nextRoll).isEqualTo(10);
+        assertThat(frames.get(9).nextNextRoll).isEqualTo(10);
     }
 
     @Test
