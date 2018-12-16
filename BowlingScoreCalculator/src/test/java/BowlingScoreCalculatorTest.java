@@ -79,7 +79,7 @@ public class BowlingScoreCalculatorTest {
         int currentRoll = 0;
 
         for(Integer roll: rolls) {
-            if(roll == 10) {
+            if(isAStrike(roll)) {
                 int rollN1 = 0;
                 if(rolls.size() > currentRoll + 1) {
                     rollN1 = rolls.get(currentRoll + 1);
@@ -109,7 +109,7 @@ public class BowlingScoreCalculatorTest {
         boolean roll2 = false;
         int count = 0;
         for(Integer roll: rolls) {
-            if(roll == 10) {
+            if(isAStrike(roll)) {
                 if(count >= 10) {
                     if(roll1) {
                         currentFrame.firstRoll = roll;
@@ -142,6 +142,10 @@ public class BowlingScoreCalculatorTest {
             count++;
         }
         return frames;
+    }
+
+    private boolean isAStrike(Integer roll) {
+        return roll == 10;
     }
 
     @Test
