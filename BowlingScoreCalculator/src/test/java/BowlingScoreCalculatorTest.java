@@ -80,6 +80,7 @@ public class BowlingScoreCalculatorTest {
 
         List<Frame> frames = new ArrayList<>();
         for(Integer roll: rolls) {
+
             frames.add(new Frame(roll, 0));
         }
 
@@ -108,8 +109,8 @@ public class BowlingScoreCalculatorTest {
     }
 
     static class Frame {
-        int firstRoll;
-        int secondRoll;
+        private int firstRoll;
+        private int secondRoll;
 
         Frame(int firstRoll, int secondRoll) {
             this.firstRoll = firstRoll;
