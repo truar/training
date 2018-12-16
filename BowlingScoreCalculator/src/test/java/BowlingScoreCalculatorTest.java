@@ -8,20 +8,33 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BowlingScoreCalculatorTest {
 
     private static final List<Integer> ONLY_STRIKE = new ArrayList<>();
+    private static final List<Integer> NO_STRIKE_NOR_SPARE = new ArrayList<>();
 
     static {
-        ONLY_STRIKE.add(10);
-        ONLY_STRIKE.add(10);
-        ONLY_STRIKE.add(10);
-        ONLY_STRIKE.add(10);
-        ONLY_STRIKE.add(10);
-        ONLY_STRIKE.add(10);
-        ONLY_STRIKE.add(10);
-        ONLY_STRIKE.add(10);
-        ONLY_STRIKE.add(10);
-        ONLY_STRIKE.add(10);
-        ONLY_STRIKE.add(10);
-        ONLY_STRIKE.add(10);
+        for(int i = 0; i < 12; i++) {
+            ONLY_STRIKE.add(10);
+        }
+
+        NO_STRIKE_NOR_SPARE.add(4);
+        NO_STRIKE_NOR_SPARE.add(4);
+        NO_STRIKE_NOR_SPARE.add(4);
+        NO_STRIKE_NOR_SPARE.add(4);
+        NO_STRIKE_NOR_SPARE.add(4);
+        NO_STRIKE_NOR_SPARE.add(4);
+        NO_STRIKE_NOR_SPARE.add(4);
+        NO_STRIKE_NOR_SPARE.add(4);
+        NO_STRIKE_NOR_SPARE.add(4);
+        NO_STRIKE_NOR_SPARE.add(4);
+        NO_STRIKE_NOR_SPARE.add(4);
+        NO_STRIKE_NOR_SPARE.add(4);
+        NO_STRIKE_NOR_SPARE.add(4);
+        NO_STRIKE_NOR_SPARE.add(4);
+        NO_STRIKE_NOR_SPARE.add(4);
+        NO_STRIKE_NOR_SPARE.add(4);
+        NO_STRIKE_NOR_SPARE.add(4);
+        NO_STRIKE_NOR_SPARE.add(4);
+        NO_STRIKE_NOR_SPARE.add(4);
+        NO_STRIKE_NOR_SPARE.add(4);
     }
 
     @Test
@@ -179,28 +192,7 @@ public class BowlingScoreCalculatorTest {
 
     @Test
     public void shouldReturn10FramesFor20Rolls() {
-        List<Integer> rolls = new ArrayList<>();
-        rolls.add(4);
-        rolls.add(4);
-        rolls.add(4);
-        rolls.add(4);
-        rolls.add(4);
-        rolls.add(4);
-        rolls.add(4);
-        rolls.add(4);
-        rolls.add(4);
-        rolls.add(4);
-        rolls.add(4);
-        rolls.add(4);
-        rolls.add(4);
-        rolls.add(4);
-        rolls.add(4);
-        rolls.add(4);
-        rolls.add(4);
-        rolls.add(4);
-        rolls.add(4);
-        rolls.add(4);
-        assertThat(getFrames(rolls).size()).isEqualTo(10);
+        assertThat(getFrames(NO_STRIKE_NOR_SPARE).size()).isEqualTo(10);
     }
 
     @Test
