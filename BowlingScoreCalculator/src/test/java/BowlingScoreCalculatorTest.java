@@ -31,6 +31,11 @@ public class BowlingScoreCalculatorTest {
         assertThat(calculateScore(ONLY_STRIKE)).isEqualTo(300);
     }
 
+    @Test
+    public void shouldReturn150GivenOnlySpare() {
+        assertThat(calculateScore(ONLY_SPARE)).isEqualTo(150);
+    }
+
     private int calculateScore(List<Integer> onlyStrike) {
         List<Frame> frames = getFrames(onlyStrike);
         int score = 0;
