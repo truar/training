@@ -152,10 +152,6 @@ public class BowlingScoreCalculatorTest {
         return frames;
     }
 
-    private boolean isTheLastRoll(int count) {
-        return count == 12;
-    }
-
     private boolean isTheLastFrame(int count) {
         return count >= 9;
     }
