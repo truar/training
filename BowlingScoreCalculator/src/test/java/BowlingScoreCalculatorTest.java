@@ -23,6 +23,14 @@ public class BowlingScoreCalculatorTest {
     }
 
     @Test
+    public void shouldReturn30forADoubleStrike() {
+        List<Integer> rolls = new ArrayList<>();
+        rolls.add(10);
+        rolls.add(10);
+        assertThat(30).isEqualTo(calculateScore(rolls));
+    }
+
+    @Test
     public void shouldReturn10forASpare() {
         List<Integer> rolls = new ArrayList<>();
         rolls.add(8);
