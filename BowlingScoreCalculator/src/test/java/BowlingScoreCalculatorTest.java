@@ -126,9 +126,11 @@ public class BowlingScoreCalculatorTest {
                 if(isTheLastFrame(i)) {
                     if(isTheLastRoll(i)) {
                         frames.add(currentFrame);
+                        currentFrame = new Frame();
                     }
                 } else {
                     frames.add(currentFrame);
+                    currentFrame = new Frame();
                 }
             } else {
                 if(roll1) {
