@@ -106,24 +106,21 @@ public class BowlingScoreCalculatorTest {
         List<Frame> frames = new ArrayList<>();
         Frame currentFrame = new Frame(0,0);
         boolean roll1 = true;
-        boolean roll2 = false;
         int count = 0;
         for(Integer roll: rolls) {
+            currentFrame.addRoll(roll);
             if(isAStrike(roll)) {
                 if(isTheLastFrame(count)) {
-                    currentFrame.addRoll(roll);
                     if(count == 12) {
                         frames.add(currentFrame);
                     }
                 } else {
-                    frames.add(new Frame(roll, 0));
+                    frames.add(currentFrame);
                 }
             } else {
                 if(roll1) {
-                    currentFrame.setFirstRoll(roll);
                     roll1 = false;
                 } else {
-                    currentFrame.setSecondRoll(roll);
                     roll1 = true;
                     frames.add(currentFrame);
                     currentFrame = new Frame(0,0);
@@ -165,8 +162,8 @@ public class BowlingScoreCalculatorTest {
         rolls.add(2);
         List<Frame> frames = getFrames(rolls);
         assertThat(frames.size()).isEqualTo(1);
-        assertThat(frames.get(0).firstRoll).isEqualTo(8);
-        assertThat(frames.get(0).secondRoll).isEqualTo(2);
+        assertThat(frames.get(0).getFirstRoll()).isEqualTo(8);
+        assertThat(frames.get(0).getSecondRoll()).isEqualTo(2);
     }
 
     @Test
@@ -178,10 +175,10 @@ public class BowlingScoreCalculatorTest {
         rolls.add(3);
         List<Frame> frames = getFrames(rolls);
         assertThat(frames.size()).isEqualTo(2);
-        assertThat(frames.get(0).firstRoll).isEqualTo(8);
-        assertThat(frames.get(0).secondRoll).isEqualTo(2);
-        assertThat(frames.get(1).firstRoll).isEqualTo(6);
-        assertThat(frames.get(1).secondRoll).isEqualTo(3);
+        assertThat(frames.get(0).getFirstRoll()).isEqualTo(8);
+        assertThat(frames.get(0).getSecondRoll()).isEqualTo(2);
+        assertThat(frames.get(1).getFirstRoll()).isEqualTo(6);
+        assertThat(frames.get(1).getSecondRoll()).isEqualTo(3);
     }
 
     @Test
@@ -217,13 +214,10 @@ public class BowlingScoreCalculatorTest {
             this.firstRoll = firstRoll;
             this.secondRoll = secondRoll;
             this.bonusRoll = bonusRoll;
-            this.rolls.add(firstRoll);
-            this.rolls.add(secondRoll);
-            this.rolls.add(bonusRoll);
         }
 
         public int getFirstRoll() {
-            return firstRoll;
+            return rolls.get(0);
         }
 
         public void setFirstRoll(int firstRoll) {
@@ -231,7 +225,7 @@ public class BowlingScoreCalculatorTest {
         }
 
         public int getSecondRoll() {
-            return secondRoll;
+            return rolls.get(1);
         }
 
         public void setSecondRoll(int secondRoll) {
