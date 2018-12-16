@@ -7,6 +7,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class BowlingScoreCalculatorTest {
 
+    private static final List<Integer> ONLY_STRIKE = new ArrayList<>();
+
+    static {
+        ONLY_STRIKE.add(10);
+        ONLY_STRIKE.add(10);
+        ONLY_STRIKE.add(10);
+        ONLY_STRIKE.add(10);
+        ONLY_STRIKE.add(10);
+        ONLY_STRIKE.add(10);
+        ONLY_STRIKE.add(10);
+        ONLY_STRIKE.add(10);
+        ONLY_STRIKE.add(10);
+        ONLY_STRIKE.add(10);
+        ONLY_STRIKE.add(10);
+        ONLY_STRIKE.add(10);
+    }
+
     @Test
     public void shouldReturnTheSumOfTheRollsScore() {
         List<Integer> rolls = new ArrayList<>();
@@ -157,20 +174,7 @@ public class BowlingScoreCalculatorTest {
 
     @Test
     public void shouldReturn10FramesFor12Strikes() {
-        List<Integer> rolls = new ArrayList<>();
-        rolls.add(10);
-        rolls.add(10);
-        rolls.add(10);
-        rolls.add(10);
-        rolls.add(10);
-        rolls.add(10);
-        rolls.add(10);
-        rolls.add(10);
-        rolls.add(10);
-        rolls.add(10);
-        rolls.add(10);
-        rolls.add(10);
-        assertThat(getFrames(rolls).size()).isEqualTo(10);
+        assertThat(getFrames(ONLY_STRIKE).size()).isEqualTo(10);
     }
 
     @Test
